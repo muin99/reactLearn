@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import CustomComponents from "./components/customComponents";
 import Greetings from "./components/Greetings";
 
 function App() {
-  const isAdmin: boolean = false;
+  const isAdmin: boolean = true;
 
   type Cat = {
     id: number;
@@ -33,11 +34,31 @@ function App() {
     },
   ];
 
+  const [count, setCount] = useState(0);
+
+  function increase() {
+    setCount(count + 1);
+  }
+
+  let bl: Boolean = true;
+
+  useEffect(() => {
+    if (bl) {
+      document.body.style.backgroundColor = "blue";
+      bl = !bl;
+    } else {
+      document.body.style.backgroundColor = "red";
+      bl = !bl;
+    }
+  }, [count]);
+
   return (
     <>
       {isAdmin ? <p>Welcome Admin</p> : <p>Welcome User</p>}
-      {isAdmin && <button>Click me</button>}
+      {isAdmin && <button onClick={increase}>Click me {count}</button>}
       <CustomComponents></CustomComponents>
+
+      <button></button>
 
       {students.map((student) => (
         <div key={student.id}>
