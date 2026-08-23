@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// This module owns the shape and runtime validation rules for task form data.
 export const taskSchema = z.object({
   title: z
     .string()
@@ -15,7 +14,6 @@ export const taskSchema = z.object({
   priority: z.enum(["low", "medium", "high"]),
 });
 
-// z.infer prevents the TypeScript type and Zod schema from drifting apart.
 export type TaskFormValues = z.infer<typeof taskSchema>;
 
 export type FormErrors = {
@@ -30,7 +28,6 @@ export const initialTaskValues: TaskFormValues = {
   priority: "medium",
 };
 
-// Zod stores an array of messages per field. The UI needs the first message.
 export function getTaskFormErrors(
   error: z.ZodError<TaskFormValues>,
 ): FormErrors {

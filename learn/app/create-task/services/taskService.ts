@@ -6,10 +6,7 @@ export type CreatedTask = TaskFormValues & {
   id: number;
 };
 
-// This module owns knowledge of Axios and the API endpoint.
-export async function createTask(
-  task: TaskFormValues,
-): Promise<CreatedTask> {
+export async function createTask(task: TaskFormValues): Promise<CreatedTask> {
   const response = await axios.post<CreatedTask>(
     "https://jsonplaceholder.typicode.com/posts",
     task,
